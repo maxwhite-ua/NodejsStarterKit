@@ -1,0 +1,10 @@
+POST http://localhost:8001/api
+
+{
+    "id": 123,
+    "auth.1/signIn": {
+        "login": "marcus",
+        "password": "marcus"
+    }
+}
+

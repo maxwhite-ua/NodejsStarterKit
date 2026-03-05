@@ -7,7 +7,6 @@ const Config = require('./lib/config.js');
 const Logger = require('./lib/logger.js');
 const Database = require('./lib/database.js');
 const Server = require('./lib/server.js');
-const Channel = require('./lib/channel.js');
 const initAuth = require('./lib/auth.js');
 
 const loadCert = async (certPath) => {
@@ -41,9 +40,8 @@ const main = async () => {
   application.sandboxInject('auth', application.auth);
 
   const { ports } = config.server;
-  const options = { cert, application, Channel };
   for (const port of ports) {
-    application.server = new Server(config.server, options);
+    application.server = new Server({ ...config.server, port, cert });
     logger.system(`Listen port ${port}`);
   }
 
